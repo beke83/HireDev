@@ -3,24 +3,6 @@ import './home.css';
 import axios from 'axios';
 
 export default function Home({ developers, setDevelopers, liked, setLiked, favorite, setFavorite }) {
-  const baseURL = 'https://api.terawork.com/service-categories/sellers-services/computer-software-development';
-
-  useEffect(() => {
-    //get list of developers
-    axios.get(baseURL)
-      .then((response) => {
-        setDevelopers(response.data.data.service_search_results.hits);
-      })
-    //console.log(developers);
-  }, []);
-
-  //function to handle SetFavorite
-  const handleFavorite = (_id) => {
-    //setDevelopers(developers.filter(dev => dev._id === _id));
-    setFavorite(developers.filter(dev => dev._id === _id));
-    console.log(favorite);
-    setLiked(true);
-  }
 
   const whiteSquare = {
     position: "absolute",
@@ -47,6 +29,23 @@ export default function Home({ developers, setDevelopers, liked, setLiked, favor
     borderRadius: "50%",
   };
 
+  const baseURL = 'https://api.terawork.com/service-categories/sellers-services/computer-software-development';
+
+  useEffect(() => {
+    //get list of developers
+    axios.get(baseURL)
+      .then((response) => {
+        setDevelopers(response.data.data.service_search_results.hits);
+      })
+    // console.log(developers);
+  }, []);
+
+  //function to handle SetFavorite
+  const handleFavorite = (_id) => {
+    const res = developers.filter((dev) => dev._id === _id);
+    console.log(res);
+  }
+
   return (
     <div className='dashboard-container'>
       <div className="dashboard">
@@ -54,8 +53,8 @@ export default function Home({ developers, setDevelopers, liked, setLiked, favor
           Hire Top Developers
         </div>
         <div className="dev-container">
-          {developers.map((developer) => (
-            <div className="dev-card" key={developer.id}>
+          {developers.map((developer, index) => (
+            <div className="dev-card" key={index}>
               <div>
                 <img src={developer._source.service_photo}
                   className='dev-card-image'

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import Sidebar from './components/sidebar/Sidebar';
 import Home from './pages/home/Home';
@@ -9,10 +9,10 @@ import Login from './pages/auth/Login';
 
 function App() {
   const [developers, setDevelopers] = useState([]);
-  const [favorite, setFavorite] =  useState([{}]);
+  const [favorite, setFavorite] = useState([{}]);
   const [liked, setLiked] = useState(false);
 
-  const [user, setUser]  = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     //Fetch the success endpoint
@@ -21,31 +21,35 @@ function App() {
       credentials: 'include',
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
       }
     }).then((response) => {
-      //console.log(response);
-      return response.json();    
+      if (response.status === 200) {
+        //console.log(response);
+        return response.json();
+      }
     }).then((resObject) => {
       //console.log(resObject);
       setUser(resObject.user);
+    }).catch((error) => {
+      console.log(error);
     })
   }, []);
 
-  console.log(user);
+ 
+
+  // console.log(user);
 
   return (
     <Router>
-    <div className='container'>
-     {user && <Sidebar />}
-      <Routes>
+      <div className='container'>
+        {user && <Sidebar />}
+        <Routes>
           <Route exact path='/' element={<Home developers={developers} setDevelopers={setDevelopers} liked={liked} setLiked={setLiked} />} />
-          <Route path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
+          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path='/favorites' element={<Favorite favorite={favorite} setFavorite={setFavorite} />} />
-      </Routes>
-    </div>
-    {/* {user && <Footer />} */}
+        </Routes>
+      </div>
+      {/* {user && <Footer />} */}
     </Router>
   );
 }

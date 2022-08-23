@@ -26,7 +26,7 @@ router.get("/login/failed", (req, res) => {
 router.get("/logout", (req, res) => {
     req.logOut();
     res.redirect(LOGOUT_URL);
-    res.clearCookie("session");
+    //res.clearCookie("session");
 })
 
 //get a client request

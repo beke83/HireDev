@@ -3,8 +3,8 @@ const GitHubStrategy = require('passport-github2').Strategy;
 
 const passport = require('passport');
 
-const GOOGLE_CLIENT_ID = "process.env.GOOGLE_CLIENT_ID";
-const GOOGLE_CLIENT_SECRET = "process.env.GOOGLE_CLIENT_SECRET";
+const GOOGLE_CLIENT_ID = "15750711863-cf6q6vdglhjatif365n5gc141pleuu0l.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
 
 const GITHUB_CLIENT_ID = "process.env.GITHUB_CLIENT_ID";
 const GITHUB_CLIENT_SECRET = "process.env.GITHUB_CLIENT_SECRET";
