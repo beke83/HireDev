@@ -15,34 +15,29 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    //Fetch the success endpoint
-    fetch('http://localhost:5000/auth/login/success', {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: "application/json",
-      }
-    }).then((response) => {
-      if (response.status === 200) {
-        //console.log(response);
-        return response.json();
-      }
-    }).then((resObject) => {
-      //console.log(resObject);
-      setUser(resObject.user);
-    }).catch((error) => {
-      console.log(error);
-    })
+    //fetching func
+    const getUser = () => {
+      fetch("http://localhost:5000/auth/login/success", {
+        method: "GET",
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      }).then(resObject => {
+        setUser(resObject.user);
+        console.log(user);
+      }).catch(error => {
+        console.log(error);
+      })
+    };
+    getUser();
   }, []);
-
- 
-
-  // console.log(user);
 
   return (
     <Router>
       <div className='container'>
         {user && <Sidebar />}
+        {/* <Sidebar /> */}
         <Routes>
           <Route exact path='/' element={<Home developers={developers} setDevelopers={setDevelopers} liked={liked} setLiked={setLiked} />} />
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />

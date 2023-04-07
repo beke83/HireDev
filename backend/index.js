@@ -19,11 +19,13 @@ app.use(passport.session());
 
 //8: use cors 
 //it lets us send sessions through our client server requests
-app.use(cors({
-    origin: 'https://localhost:3000',
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: 'https://localhost:3000',
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+// }));
+
+app.use(cors());
 
 //9
 app.use("/auth", authRoute);
