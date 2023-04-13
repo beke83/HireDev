@@ -49,7 +49,7 @@ export default function Home({ developers, setDevelopers, liked, setLiked, favor
   return (
     <div className='dashboard-container'>
       <div className="dashboard">
-        <div className="dashboard-title">
+        <div className="text-3xl font-bold">
           Hire Top Developers
         </div>
         <div className="dev-container">

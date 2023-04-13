@@ -14,33 +14,33 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    //fetching func
-    const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
-        method: "GET",
-      }).then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-      }).then(resObject => {
-        setUser(resObject.user);
-        console.log(user);
-      }).catch(error => {
-        console.log(error);
-      })
-    };
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   //fetching func
+  //   const getUser = () => {
+  //     fetch("http://localhost:5000/auth/login/success", {
+  //       method: "GET",
+  //     }).then((response) => {
+  //       if (response.status === 200) {
+  //         return response.json();
+  //       }
+  //     }).then(resObject => {
+  //       setUser(resObject.user);
+  //       console.log(user);
+  //     }).catch(error => {
+  //       console.log(error);
+  //     })
+  //   };
+  //   getUser();
+  // }, []);
 
   return (
     <Router>
       <div className='container'>
-        {user && <Sidebar />}
-        {/* <Sidebar /> */}
+        {/* {user && <Sidebar />} */}
+        <Sidebar />
         <Routes>
           <Route exact path='/' element={<Home developers={developers} setDevelopers={setDevelopers} liked={liked} setLiked={setLiked} />} />
-          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path='/favorites' element={<Favorite favorite={favorite} setFavorite={setFavorite} />} />
         </Routes>
       </div>
